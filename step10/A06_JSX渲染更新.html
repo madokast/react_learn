@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        function App() {
+            // 使用 React.useState(init_val) 获取值变量和 setter
+            // JSX 中使用值变量，其他位置使用 setter 控制值，改变时会自动重新渲染
+            const [count, setCount] = React.useState(0);
+            function clickFunc() {setCount(count + 1);}
+            return <button onClick={clickFunc}>{count}</button>
+        }
+
+        const container = document.getElementById('root');
+        const root = ReactDOM.createRoot(container);
+        root.render(<App />);
+
+    </script>
+</body>
+
+</html>

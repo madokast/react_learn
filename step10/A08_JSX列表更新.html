@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        // 初始列表，不能放在 App 中，因为 APP 会被多次调用
+        const initRecords = [
+            { time: (new Date()).toLocaleTimeString(), id: 0 },
+        ]
+        let nextId = initRecords.length
+
+        function App() {
+
+            // 列表的处理器，传入列表和动作信息
+            function recordsReducer(records, action) {
+                switch (action.type) {
+                    case "add": {
+                        return [...records, action.record]
+                    }
+                    default: {
+                        throw Error("Unknown action " + action.type)
+                    }
+                }
+            }
+
+            // 将列表行为和列表绑定
+            const [records, recordsHandle] = React.useReducer(recordsReducer, initRecords)
+            const [nowTime, setNowTime] = React.useState((new Date()).toLocaleTimeString())
+            setInterval(function () {setNowTime((new Date()).toLocaleTimeString())}, 1000)
+
+            // 展示列表组件。组件可以传值
+            function BooksList({ records }) {
+                const listsJXS = records.map(record => {
+                    return <li key={record.id}>{record.time}</li>
+                })
+                return <ul>{listsJXS}</ul>
+            }
+
+            // 具体的 add 函数
+            function addRecord() {
+                recordsHandle({ type: "add", record: { id: nextId++, time: nowTime} })
+            }
+
+            // 添加组件按钮
+            function AddBookButton() {
+                return <button onClick={addRecord}>add {nowTime}</button>
+            }
+
+
+            return <div><AddBookButton /><BooksList records={records} /></div>
+        }
+
+        const container = document.getElementById('root');
+        const root = ReactDOM.createRoot(container);
+        root.render(<App />);
+
+    </script>
+</body>
+
+</html>

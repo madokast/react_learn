@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Hello World</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <input id="input" />
+  <div id="root"></div>
+  <script type="text/babel">
+    const input = document.getElementById("input")
+
+    function App() {
+      const [result, setResult] = React.useState(input.value)
+      function send() {
+        axios.post("http://localhost:8080/time", { name: input.value })
+          .then(function (response) { setResult(JSON.stringify(response.data)) })
+          .catch(function (err) { console.log(err) })
+      }
+
+      return <div><button onClick={send}>send</button><p>{result}</p></div>
+    }
+
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+
+  </script>
+</body>
+
+</html>
