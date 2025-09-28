@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+// import App from './App';
+import A01DisplayData from './a01_display_data';
+import A02UseState from './a02_use_state';
+import A03ShareData from './a03_share_data';
+import A04Ranges from './a04_ranges';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -9,7 +13,13 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <A01DisplayData />
+    <hr />
+    <A02UseState />
+    <hr />
+    <A03ShareData initialCount0={10} initialCount1={20} />
+    <hr />
+    <A04Ranges />
   </React.StrictMode>
 );
 
