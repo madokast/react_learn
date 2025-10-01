@@ -6,6 +6,7 @@ import A01DisplayData from './a01_display_data';
 import A02UseState from './a02_use_state';
 import A03ShareData from './a03_share_data';
 import A04Ranges from './a04_ranges';
+import A06CtxFather from './a06_context/ctxFather'
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -20,6 +21,8 @@ root.render(
     <A03ShareData initialCount0={10} initialCount1={20} />
     <hr />
     <A04Ranges />
+    <hr />
+    <A06CtxFather />
   </React.StrictMode>
 );
 
